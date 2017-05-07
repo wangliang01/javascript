@@ -1,0 +1,106 @@
+数据类型之object
+
+对象是属性的无序合集
+
+基础数据类型与对象的比较
+
+1)对象有属性
+
+2)对象有方法
+
+3)对象可以改变
+
+4)基础数据类型是值的比较，对象的比较是引用的比较
+
+
+2.对象的分类
+
+1)内部对象
+	错误对象
+	常用对象: Boolean, Number, String, Array, Date, Function, Object, Regrex
+	内置对象: Global, Math, JSON
+
+2)宿主对象: window, document
+
+3)自定义对象
+
+
+
+3.基础数据类型与对象的转换
+
+1) undefined, null转换为空对象
+
+2) boolean转换为对象，对象只有一个属性，属性名为原始值，属性值为boolean值
+
+3) number转换为对象， 对象也只有一个属性，属性名为原始值， 属性值为number值
+
+4) string转换为对象， 对象除原始值外，还另有几个属性，length, 及索引值
+
+例子： Object('abc');
+{
+	[[PrimitiveValue]]: 'abc',
+	length: 3,
+	'0': 'a',
+	'1': 'b',
+	'2': 'c'
+}
+
+对象转换为基础数据类型
+
+对象转换为布尔值  都为true
+
+对象转换为数值  先调用valueOf(),如果能转换为原始值，则进行原始数据类型的转换，若不能转换为原始值，再调用toString()，
+
+如果能转换为原始值，则进行原始数据类型的转换，若不能转换为原始值 则返回 "[object Object]"
+
+
+
+4.对象的创建
+
+对象的创建有3种方法：
+
+1)对象字面量
+
+	var person = {
+		name: 'wangliang',
+		age: 26
+	}
+
+2)使用new 构造函数创建
+
+var person = new Object();
+
+person.name = 'wangliang';
+
+person.age = 26
+
+如果没有参数 ()可以省略
+
+var person = new Object
+
+3)使用Object.create()
+
+Object.create(a)  a:指创建对象的原型对象
+
+
+
+5.对象属性的访问
+
+对象属性访问是通过.或者[]来访问
+
+访问机制
+
+当js解释器遇到.或者[],先检查.或者[]前面的数据类型
+
+如果是undefined,null 报错
+
+如果是boolean,number,string,则先将其转换成对应的包装对象
+
+如查是object,则进行下一步
+
+如果是.则在对象中查找.后面的字符串，如果找到，则返回对应的值，如果没有找到，则返回undefined
+
+如果是[],则先将[]中的表达式进行运算，再将值转换为字符串，然后，在对象中查找对应的属性名，如果没有找到，则返回undefined
+
+
+
