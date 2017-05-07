@@ -1,0 +1,110 @@
+1.数据类型
+
+js中有5+1种数据类型
+
+5种基础数据类型，1种复杂数据类型
+
+基础数据类型： undefined, null, boolean, number, string
+
+复杂数据类型： object
+
+基础数据类型与复杂数据类型的比较：
+
+1)对象有属性
+
+2)对象有方法
+
+3)对象可以改变
+
+4)基础数据类型的比较是值的比较，对象的比较是引用的比较
+
+
+
+
+2.undefined
+
+undefined是js全局对象上的一个属性
+
+当声明一个变量，没有对其进行赋值操作时，其值默认为undefined
+
+例子：var a;  //undefined
+
+undefined的用途：
+
+检测一个变量，或者对象的属性是否存在使用undefined
+
+例子1：要创建一个全局变量MYAPP
+
+if(typeof MYAPP === 'undefined'){
+	var MYAPP = {};
+}
+
+例子2: 给对象添加方法
+
+if(typeof String.prototype.reverse === 'undefined'){
+	String.prototype.reverse = function(){
+		//更多代码
+		....
+	}
+}
+
+
+
+
+3.null
+
+null是一个特殊的对象，表示空
+
+使用typeof null  //'object'
+
+undefined与null的比较：
+
+相同点：
+
+1)都只有一个值
+
+2)转换成boolean值都为false
+
+3)都不能调用属性和方法(这也是报错时常发生一个问题)
+
+不同点：
+
+1)null是一个关键字，使用var null 会报错
+
+2)undefined是全局对象上的一个属性，使用var undefined不会报错
+
+3)使用typeof查看数据类型，返回的结果不相同，typeof null 得到 'object' ; typeof undefined 得到 'undefined'
+
+4)转换成数值(number)时，得到的结果不相同， null得到0， undefined得到NaN
+
+
+4.boolean
+
+布尔类型是用来表示真假的一种数据类型，其只有两个值true和false
+
+布尔类型的用途：
+
+用于比较和判断
+
+任何数据类型都可以转换成布尔值，但只有6个值转换成布尔值为false，其余都为true
+
+这6个值为undefined, null, 0, -0, NaN, ''
+
+将其它类型转换成布尔值的方法：
+
+1)Boolean() 可以将任意数据类型转换成布尔值
+
+2)!!   可以将任意数据类型转换成布尔值
+
+例子1： 将字符串转成布尔值
+
+var a = 'abc';
+
+!!a  //true
+
+例子2：将对象转换成布尔值
+
+var obj = {};
+
+Boolean(obj); //true
+
