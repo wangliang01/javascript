@@ -97,14 +97,12 @@
                 if($(siblings[i]).prop('checked')){
 
                     checkHalf = true;
-
-                    break;
                 }
             }
 
             checkAll = $(target).prop('checked') && checkAll;
 
-            checkHalf = $(target).prop('checked') || checkHalf || parent.prop('indeterminate');
+            checkHalf = $(target).prop('checked') || checkHalf || $(target).prop('indeterminate');
 
             checkAll && (checkHalf = false);
 
