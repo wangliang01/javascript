@@ -34,14 +34,14 @@
     // 初始化
     treeCheckbox.init = function(root) {
 
-    	// 是否默认勾选
+        // 是否默认勾选
         var $checkbox = $('input[type="checkbox"]');
 
         for (var i = 0, len = $checkbox.length; i < len; i++) {
-        	
-        	var checked = $($checkbox[i]).attr('data-checked') === '1';
 
-        	$($checkbox[i]).prop('checked', checked);
+            var checked = $($checkbox[i]).attr('data-checked') === '1';
+
+            $($checkbox[i]).prop('checked', checked);
 
         }
         // 绑定事件
@@ -52,13 +52,13 @@
             $target = $target.closest('.tree-checkbox-wrapper').find('input[type="checkbox"]');
 
             $target.attr('data-checked', +$target.prop('checked'));
-            
+
             var $parent = $target.closest('.tree-checkbox-list').siblings('.tree-checkbox-wrapper').find('input[type="checkbox"]');
 
             var $siblings = $target.closest('.tree-checkbox-item').siblings('.tree-checkbox-item').find('input[type="checkbox"]');
 
             var $children = $target.closest('.tree-checkbox-wrapper').siblings('.tree-checkbox-list').find('input[type="checkbox"]');
-            
+
             // 父元素是否勾选
             parentIsChecked($target, $siblings, $parent);
 
@@ -68,29 +68,46 @@
 
         })
 
-        var parentIsChecked = function(target, siblings, parent) {
+        function parentIsChecked(target, siblings, parent) {
 
             if ($(target).length === 0) {
                 return;
             }
 
-            var checked = true,
-                distribution = 0;
+            var checkAll = true,
+                distribution = 0,
+                checkHalf = false;
 
             for (var i = 0, len = siblings.length; i < len; i++) {
 
                 if (!$(siblings[i]).prop('checked')) {
 
-                    checked = false;
+                    checkAll = false;
+
+                }
+
+                if($(siblings[i]).prop('checked')){
+
+                    checkHalf = true;
 
                 }
             }
 
-            checked = $(target).prop('checked') && checked;
+            checkAll = $(target).prop('checked') && checkAll;
 
-            distribution = checked ? 1 : 0;
+            checkHalf = $(target).prop('checked') || checkHalf;
 
-            parent.prop('checked', checked).attr('data-checked', distribution);
+            checkAll && (checkHalf = false);
+
+            distribution = checkAll ? 1 : 0;
+
+
+            parent.prop('indeterminate', checkHalf);
+
+            parent.prop('checked', checkAll).attr('data-checked', distribution);
+
+
+
 
             $target = $(parent);
 
@@ -103,7 +120,7 @@
 
         };
 
-        var childrenIsChecked = function(target, children) {
+        function childrenIsChecked(target, children) {
             var checked = $(target).prop('checked');
 
             for (var i = 0, len = children.length; i < len; i++) {
