@@ -41,7 +41,15 @@
 
             var checked = $($checkbox[i]).attr('data-checked') === '1';
 
-            $($checkbox[i]).prop('checked', checked);
+            var  $target = $($checkbox[i]);
+
+            $target.prop('checked', checked);
+
+            var $parent = $target.closest('.tree-checkbox-list').siblings('.tree-checkbox-wrapper').find('input[type="checkbox"]');
+
+            var $siblings = $target.closest('.tree-checkbox-item').siblings('.tree-checkbox-item').find('input[type="checkbox"]');
+
+            parentIsChecked($target, $siblings, $parent);
 
         }
         // 绑定事件
@@ -90,12 +98,13 @@
 
                     checkHalf = true;
 
+                    break;
                 }
             }
 
             checkAll = $(target).prop('checked') && checkAll;
 
-            checkHalf = $(target).prop('checked') || checkHalf;
+            checkHalf = $(target).prop('checked') || checkHalf || parent.prop('indeterminate');
 
             checkAll && (checkHalf = false);
 
