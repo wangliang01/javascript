@@ -1,0 +1,29 @@
+语句
+
+语句就是指控制程序的指令
+
+语句一般是以;结尾
+
+js中有20条语句
+
+声明语句(2个)
+
+声明变量：var xxx   声明函数：function xxx(){}
+
+空语句(1个)：;
+
+条件语句(4个)
+
+if语句   switch语句(switch, case, default)
+
+循环语句(4个)
+
+while语句  do ... while 语句   for语句  for ... in  语句
+
+中断语句(4个)
+
+break语句  continue语句  return 语句  throw语句
+
+其他语句(5个)
+
+label语句  use strict  with语句  try ... catch语句  debugger
