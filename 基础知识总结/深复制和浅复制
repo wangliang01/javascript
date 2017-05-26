@@ -1,0 +1,34 @@
+1.浅复制
+将一个对象中的属性复制到另一个对象中
+
+function extend(parent, child) {
+	var i;
+	child = child || {};
+	for(var i in parent) {
+		if(parent.hasOwnProperty(i)) {
+			child[i] = parent[i]
+		}
+	}
+	return child;
+}
+
+2.深复制
+
+function extendDeep(parent, child) {
+	var i,
+		toStr = Object.prototype.toString,
+		astr = '[object Array]';
+
+	child = child || [];
+
+	for(var i in parent) {
+		if(parent.hasOwnProperty(i)) {
+			if(typeof parent[i] === 'object'){
+				child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
+			} else {
+				child[i] = parent[i];
+			}
+		}
+	}
+	return child;
+}
