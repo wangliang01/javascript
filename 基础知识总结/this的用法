@@ -1,0 +1,56 @@
+this的四种用法
+
+1.作为纯函数调用：指向全局作用域
+	function test() {
+		this.x = 1;
+		console.log(this.x);
+	}
+
+	test(); //1
+
+
+	为了证明this指向全局对象，将代码简单修改一下
+	var x =1;
+	function test() {
+		this.x = 2;
+	}
+	test();
+	console.log(x)  //2
+
+2.作为对象的方法调用：指向上级对象
+	var person = {
+		name: 'wangliang',
+		age: 26,
+		sayName: function() {
+			console.log(this.name)
+		}
+	}
+
+	person.sayName()  // 'wangliang'
+
+3.作为构造函数调用：指向new创建出来的新对象
+	functio Person(name, age) {
+		this.name = name;
+		this.age = age;
+		this.sayName = function() {
+			console.log(this.name)
+		}
+	}
+
+	var person = new Person('wangliang', 26);
+
+	person.name // 'wangliang'
+
+4.强制指向一个对象：apply() call()
+	function sayName (name) {
+		console.log(name)
+	}
+
+	var person = {
+		name: 'wangliang',
+		age: 26
+	}
+
+	sayName.call(person, person.name); //'wangliang'
+
+	apply(), call()的参数为空或者为null时，默认调用全局对象
