@@ -204,4 +204,104 @@ function Person (name, age) {
 	}
 
 	return o;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+}   
+
+8.单体模式
+
+1）在静态属性中缓存单个实例
+function Universe() {
+	if(typeof Universe.instance === 'object') {
+		return Universe.instance;
+	}
+
+	// 正常进行
+	this.bang = 'Big';
+	//...
+
+	//缓存
+	Universe.instance = this;
+
+	//隐式返回
+	return this;
+} 
+
+//使用
+var uni1 = new Universe();
+
+var uni2 = new Universe();
+
+uni1 === uni2 //true  
+
+注意：代码中的Universe不能替换为this
+
+
+2)闭包中的实例
+function Universe() {
+	//缓存实例
+	var instance = this;
+
+	//正常进行
+	this.bang = 'Big';
+
+	//重写构造函数
+	Universe = function() {
+		return instance;
+	}
+}   
+
+//测试
+
+var uni1 = new Universe();
+
+var uni2 = new Universe();
+
+uni1 === uni2 //true    
+
+9.迭代器模式
+
+迭代器模式中，通常有一个包装数据集合的对象；
+
+在迭代器模式中，对象需要提供一个next()方法。依次调用next()必须返回下一个连续的元素。
+
+在迭代器模式中，对象还提供了一个hasNext()方法，用于检查是否到达了数据的末尾。
+
+var agg = (function() {
+	var index = 0,
+		data = [1,2,3,4,5],
+		length = data.length;
+
+	return {
+		next: function() {
+			var element;
+			if(!this.hasNext()){
+				return null;
+			}
+			element = data[index];
+			index++;
+			return element;
+		},
+		hasNext: function() {
+			return index < length;
+		}
+	}
+})()
+
+10.装饰者模式
+
+function Sale(price) {
+	this.price = price || 100;
+}                             
+
+Sale.prototype.getPrice = function() {
+	return this.price;
+}  
+
+Sale.prototype.decorate = function(decorator) {
+	var F = new function() {},
+		overrides = this.constructor.decorators[decorator],
+		i,newobj;
+
+	F.prototype = this;
+
+	newobj = new F();
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
