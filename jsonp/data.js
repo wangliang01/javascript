@@ -1,0 +1,3 @@
+jsonpCallback({
+	name: 'wangliang'
+});
